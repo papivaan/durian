@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import './App.css';
+import MapContainer from './components/MapContainer';
 
 class App extends Component {
   render() {
@@ -37,8 +38,10 @@ class App extends Component {
         </Navbar>
           <Row>
             <Col>
-              <Row className="justify-content-md-center">
-                <p>Tähän kartta</p>
+              <Row>
+              <Col md={12} style={{ height: '80vh', width: '100%'}}>
+                <MapContainer />
+              </Col>
               </Row>
             </Col>
           </Row>
