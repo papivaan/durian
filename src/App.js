@@ -1,25 +1,47 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Row, Col, Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Navbar bg="dark" expand="lg" variant="dark">
+          <Navbar.Brand href="#home">Durian maps</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link
+                href="#home"
+                onClick={() => alert('pöö')}>
+                  Home
+                </Nav.Link>
+              <Nav.Link
+                href="#data"
+                onClick={() => alert('pöö')}>
+                Data
+              </Nav.Link>
+              <NavDropdown title="Options" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#track/3.1">Track a vessel</NavDropdown.Item>
+                <NavDropdown.Item href="#fleet/3.2">Fleet info</NavDropdown.Item>
+                <NavDropdown.Item href="#options/3.3">Display more</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#about/3.4">About</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+            <Form inline>
+              <FormControl type="text" placeholder="Search parking area" className="mr-sm-2" />
+              <Button variant="outline-success">Search</Button>
+            </Form>
+          </Navbar.Collapse>
+        </Navbar>
+          <Row>
+            <Col>
+              <Row className="justify-content-md-center">
+                <p>Tähän kartta</p>
+              </Row>
+            </Col>
+          </Row>
       </div>
     );
   }
