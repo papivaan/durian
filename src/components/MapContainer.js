@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Map, GoogleApiWrapper, Polygon, InfoWindow} from 'google-maps-react';
+import mapStyle from '../mapStyle.json';
 
 export class MapContainer extends Component {
   state = {
@@ -25,7 +26,6 @@ export class MapContainer extends Component {
   };
 
   render() {
-    console.log(this.state);
     const exampleCoords = [
       {lat: 62.238805, lng: 25.741274},
       {lat: 62.238852, lng: 25.741349},
@@ -38,6 +38,7 @@ export class MapContainer extends Component {
         google={this.props.google}
         zoom={16}
         style={{width: '100vw', height: '95vh', position: 'absolute'}}
+        styles={mapStyle}
         visible
         initialCenter={{
           lat: 62.238211,
