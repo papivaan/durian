@@ -37,7 +37,7 @@ export class MapContainer extends Component {
       <Map
         google={this.props.google}
         zoom={16}
-        style={{width: '100%', height: '100%', position: 'relative'}}
+        style={{width: '100vw', height: '95vh', position: 'absolute'}}
         visible
         initialCenter={{
           lat: 62.238211,
@@ -46,11 +46,11 @@ export class MapContainer extends Component {
       >
         <Polygon
           paths={exampleCoords}
-          strokeColor="#0000FF"
-          strokeOpacity={0.8}
+          strokeColor="#161c00"
+          strokeOpacity={0.5}
           strokeWeight={2}
-          fillColor="#0000FF"
-          fillOpacity={0.35}
+          fillColor="#fff500"
+          fillOpacity={0.2}
           onClick={this.onPolygonClick}
         />
         <InfoWindow

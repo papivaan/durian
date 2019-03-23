@@ -4,10 +4,10 @@ import { Polygon } from 'google-maps-react';
 const ParkingArea = props => (
   <Polygon
     paths={props.coords}
-    strokeColor="#0000FF"
+    strokeColor="#161c00"
     strokeOpacity={0.8}
     strokeWeight={2}
-    fillColor="#0000FF"
+    fillColor="#fff95e"
     fillOpacity={0.35}
   />
 );

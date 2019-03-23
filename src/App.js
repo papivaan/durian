@@ -39,7 +39,7 @@ class App extends Component {
           <Row>
             <Col>
               <Row>
-              <Col md={12} style={{ height: '80vh', width: '100%'}}>
+              <Col md={12} style={{ height: '100vh', width: '100%'}}>
                 <MapContainer />
               </Col>
               </Row>
