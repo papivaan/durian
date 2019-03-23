@@ -45,8 +45,6 @@ export class MapContainer extends Component {
       isLoading: true,
       area: area
     });
-    console.log(this.state.area.parkingType);
-    console.log(this.state.area);
   };
 
   onMapClicked = (props) => {
@@ -79,8 +77,9 @@ export class MapContainer extends Component {
   }
 
   handleParking = () => {
-    console.log('parking');
-    axios.post('/sendConfirmationSms', { address: this.state.address })
+    console.log(this.state.area);
+    const postInfo = this.state.area.name ? this.state.area.name : this.state.address;
+    axios.post('/sendConfirmationSms', { address: postInfo })
       .then(res => {
         console.log(res);
       })
@@ -110,6 +109,7 @@ export class MapContainer extends Component {
             Reittiohjeet (Google Maps)
           </a>
           <Button
+            disabled
             size="sm"
             style={{ marginTop: '4px'}}
             variant="success"
