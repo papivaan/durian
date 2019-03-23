@@ -14,20 +14,19 @@ import '../App.css';
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
-    activePolygon: {},
     center: {},
     address: '',
     isLoading: false,
   };
 
-  onPolygonClick = (props, marker) => {
-    const areaCenter = geolib.getCenter(props.paths);
+  onPolygonClick = area => {
+    console.log(area);
+    const areaCenter = geolib.getCenter(area.coords);
     this.handleGetAddress(
       Number(areaCenter.latitude),
       Number(areaCenter.longitude)
     );
     this.setState({
-      activePolygon: marker,
       showingInfoWindow: true,
       center: areaCenter,
       isLoading: true,
@@ -38,7 +37,6 @@ export class MapContainer extends Component {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
-        activePolygon: null,
         areaCenter: null,
         address: ''
       })
@@ -118,7 +116,7 @@ export class MapContainer extends Component {
             strokeWeight={2}
             fillColor="#fff500"
             fillOpacity={0.2}
-            onClick={this.onPolygonClick}
+            onClick={() => this.onPolygonClick(area)}
           />
         ))}
         <InfoWindow
