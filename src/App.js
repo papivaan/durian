@@ -26,9 +26,9 @@ class App extends Component {
                 Data
               </Nav.Link>
               <NavDropdown title="Options" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#track/3.1">Track a vessel</NavDropdown.Item>
-                <NavDropdown.Item href="#fleet/3.2">Fleet info</NavDropdown.Item>
-                <NavDropdown.Item href="#options/3.3">Display more</NavDropdown.Item>
+                <NavDropdown.Item href="#track/3.1">Parking areas</NavDropdown.Item>
+                <NavDropdown.Item href="#fleet/3.2">General fees</NavDropdown.Item>
+                <NavDropdown.Item href="#options/3.3">Find more information</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#about/3.4">About</NavDropdown.Item>
               </NavDropdown>
