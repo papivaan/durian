@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Polygon, InfoWindow } from 'google-maps-react';
-import { Button } from 'react-bootstrap';
 import geolib from 'geolib';
+import _ from 'lodash';
 import mapStyle from '../mapStyle.json';
-import data from '../example.json';
+// import data from '../example.json';
+import data from '../backend/myjsonfile.json';
+import axios from 'axios';
 
 import '../App.css';
-
-const axios = require('axios');
 
 export class MapContainer extends Component {
   state = {
@@ -24,23 +24,26 @@ export class MapContainer extends Component {
     this.setState({
       activePolygon: marker,
       showingInfoWindow: true,
-      center: areaCenter
+      center: areaCenter,
     });
   };
+
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         activePolygon: null,
         areaCenter: null,
+        address: ''
       })
     }
   };
 
   handleGetAddress = (LAT, LNG) => {
-      axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${LAT}+${LNG}&key=4fdd87a7e369405b8b1ccaececf50520`).then(res => {
+      axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${LAT}+${LNG}&key=4fdd87a7e369405b8b1ccaececf50520`)
+      .then(res => {
         var components = res.data.results[0].components;
-        var formatted_address = `${components.road} ${components.house_number}`;
+        var formatted_address = `${components.road} ${components.house_number ? components.house_number : ''}`;
         this.setState({
           address: formatted_address
         });
@@ -53,7 +56,7 @@ export class MapContainer extends Component {
   render() {
     const LAT = Number(this.state.center.latitude);
     const LNG = Number(this.state.center.longitude);
-    const areas = data.areas;
+    const areas = _.compact(data.areas);
     return (
       <Map
         google={this.props.google}
@@ -71,7 +74,7 @@ export class MapContainer extends Component {
       >
         {areas.map(area => (
           <Polygon
-            key={area.type} // fix this
+            key={area.id}
             paths={area.coords}
             lat={LAT}
             lng={LNG}
