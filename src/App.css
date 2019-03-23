@@ -14,3 +14,7 @@
 html, body {
   overflow: hidden;
 }
+
+.gm-svpc {
+  display: none;
+}

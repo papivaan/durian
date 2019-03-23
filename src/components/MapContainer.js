@@ -4,6 +4,8 @@ import geolib from 'geolib';
 import mapStyle from '../mapStyle.json';
 import data from '../example.json';
 
+import '../App.css';
+
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
