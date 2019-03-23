@@ -15,16 +15,21 @@ export class MapContainer extends Component {
     showingInfoWindow: false,
     activePolygon: {},
     center: {},
-    address: ''
+    address: '',
+    isLoading: false,
   };
 
   onPolygonClick = (props, marker) => {
     const areaCenter = geolib.getCenter(props.paths);
-    this.handleGetAddress(props.lat, props.lng);
+    this.handleGetAddress(
+      Number(areaCenter.latitude),
+      Number(areaCenter.longitude)
+    );
     this.setState({
       activePolygon: marker,
       showingInfoWindow: true,
       center: areaCenter,
+      isLoading: true,
     });
   };
 
@@ -45,12 +50,17 @@ export class MapContainer extends Component {
         var components = res.data.results[0].components;
         var formatted_address = `${components.road} ${components.house_number ? components.house_number : ''}`;
         this.setState({
-          address: formatted_address
+          address: formatted_address,
+          isLoading: false,
         });
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  handleClearAddress = () => {
+    this.setState({ address: '' });
   }
 
   handleParking = () => {
@@ -102,8 +112,6 @@ export class MapContainer extends Component {
           <Polygon
             key={area.id}
             paths={area.coords}
-            lat={LAT}
-            lng={LNG}
             strokeColor="#161c00"
             strokeOpacity={0.5}
             strokeWeight={2}
@@ -114,7 +122,7 @@ export class MapContainer extends Component {
         ))}
         <InfoWindow
           position={{ lat: LAT, lng: LNG }}
-          visible={this.state.showingInfoWindow}
+          visible={this.state.showingInfoWindow && !this.state.isLoading}
           onOpen={e => {
             onInfoWindowOpen(this.props, e);
           }}
