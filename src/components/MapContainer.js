@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Map, GoogleApiWrapper, Polygon, InfoWindow} from 'google-maps-react';
+import { Map, GoogleApiWrapper, Polygon, InfoWindow } from 'google-maps-react';
+import { Button } from 'react-bootstrap';
 import geolib from 'geolib';
 import mapStyle from '../mapStyle.json';
 import data from '../example.json';
