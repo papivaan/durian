@@ -4,7 +4,8 @@ import { Map, GoogleApiWrapper, Polygon, InfoWindow } from 'google-maps-react';
 import geolib from 'geolib';
 import _ from 'lodash';
 import mapStyle from '../mapStyle.json';
-import data from '../backend/durianMap.json';
+// import data from '../example.json';
+import data from '../backend/durianMapJson.json';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 
