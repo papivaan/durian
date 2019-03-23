@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Map, GoogleApiWrapper, Polygon, InfoWindow} from 'google-maps-react';
 import mapStyle from '../mapStyle.json';
+import data from '../example.json';
 
 export class MapContainer extends Component {
   state = {
@@ -26,13 +27,7 @@ export class MapContainer extends Component {
   };
 
   render() {
-    const exampleCoords = [
-      {lat: 62.238805, lng: 25.741274},
-      {lat: 62.238852, lng: 25.741349},
-      {lat: 62.238452, lng: 25.742290},
-      {lat: 62.238415, lng: 25.742207},
-    ];
-
+    const areas = data.areas;
     return (
       <Map
         google={this.props.google}
@@ -45,21 +40,23 @@ export class MapContainer extends Component {
           lng: 25.741593
         }}
       >
-        <Polygon
-          paths={exampleCoords}
-          strokeColor="#161c00"
-          strokeOpacity={0.5}
-          strokeWeight={2}
-          fillColor="#fff500"
-          fillOpacity={0.2}
-          onClick={this.onPolygonClick}
-        />
+        {areas.map(area => (
+          <Polygon
+            key={area.type} // fix this
+            paths={area.coords}
+            strokeColor="#161c00"
+            strokeOpacity={0.5}
+            strokeWeight={2}
+            fillColor="#fff500"
+            fillOpacity={0.2}
+            onClick={this.onPolygonClick}
+          />
+        ))}
         <InfoWindow
-          // marker={this.state.activePolygon}
           position={{lat: 62.238852, lng: 25.741349}}
           visible={this.state.showingInfoWindow}>
             <div>
-              <h3>Gummeruksenkatu</h3>
+              <strong>Gummeruksenkatu</strong>
               <p>Kiekko: 2h</p>
               <p>Tilaa: on</p>
             </div>
