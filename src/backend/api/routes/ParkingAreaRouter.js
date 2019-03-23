@@ -4,4 +4,7 @@ module.exports = function(app) {
 
   app.route('/parkingAreas')
     .get(parkingAreas.getParkingData)
+
+  app.route('/sendConfirmationSms')
+    .post(parkingAreas.sendConfirmationSms)
 };

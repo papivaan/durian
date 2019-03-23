@@ -15,9 +15,11 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "https": "^1.0.0",
     "mongoose": "^5.4.13",
     "node-inspect": "^1.11.5",
-    "npm": "^6.8.0"
+    "npm": "^6.8.0",
+    "querystring": "^0.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
