@@ -20,7 +20,7 @@ durianJSON.areas = areas;
 durianJSON.entrances = entrances;
 
 let durianStr = JSON.stringify(durianJSON);
-fs.writeFile('myjsonfile.json', durianStr, 'utf8', 
+fs.writeFile('durianMapJson.json', durianStr, 'utf8', 
 () => {console.log("Geojson parsed!")});
 
 function createParkingArea(feature){
@@ -68,4 +68,3 @@ function createCoordinate(longitude, latitude){
   coordinate.lng = longitude;
   return coordinate;
 }
-
