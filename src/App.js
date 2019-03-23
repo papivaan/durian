@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
-import { Row, Col, Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Row, Col, Navbar, Nav, NavDropdown, Form, } from 'react-bootstrap';
 import './App.css';
 import MapContainer from './components/MapContainer';
 import './durra.PNG';
 
 class App extends Component {
+  state = {
+    showWithFee: true,
+    showNoFee: true,
+  };
+
+  handleChangeWithFee = () => {
+    this.setState({ showWithFee: !this.state.showWithFee });
+  }
+
+  handleChangeNoFee = () => {
+    this.setState({ showNoFee: !this.state.showNoFee });
+  }
+
   render() {
     return (
       <div className="App">
@@ -34,9 +47,31 @@ class App extends Component {
                 <NavDropdown.Item href="#about/3.4">About</NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Form inline className="d-none d-md-block">
-              <FormControl type="text" placeholder="Enter destination" className="mr-sm-2" />
-              <Button variant="outline-success">Search</Button>
+            <Form inline>
+              {/* <FormControl type="text" placeholder="Enter destination" className="mr-sm-2" />
+              <Button variant="outline-success">Search</Button> */}
+              <Row>
+                <Col>
+                  <Form.Check
+                    checked={this.state.showWithFee}
+                    onChange={this.handleChangeWithFee}
+                    className="checkBox"
+                    sm="2"
+                    type="checkbox"
+                    label="Maksulliset"
+                  />
+                </Col>
+                <Col>
+                  <Form.Check
+                    checked={this.state.showNoFee}
+                    onChange={this.handleChangeNoFee}
+                    className="checkBox"
+                    sm="2"
+                    type="checkbox"
+                    label="Ilmaiset"
+                  />
+                </Col>
+              </Row>
             </Form>
           </Navbar.Collapse>
         </Navbar>
@@ -44,7 +79,10 @@ class App extends Component {
             <Col>
               <Row>
               <Col md={12} style={{ height: '100vh', width: '100%'}}>
-                <MapContainer />
+                <MapContainer
+                  showFee={this.state.showWithFee}
+                  showNoFee={this.state.showNoFee}
+                />
               </Col>
               </Row>
             </Col>

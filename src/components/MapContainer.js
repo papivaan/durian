@@ -92,8 +92,13 @@ export class MapContainer extends Component {
     const LNG = Number(this.state.center.longitude);
     const areas = _.compact(this.state.data.areas);
 
+    let filteredAreas = areas;
+    if(!this.props.showFee) filteredAreas = areas.filter(area => !area.fee);
+    if(!this.props.showNoFee) filteredAreas = areas.filter(area => area.fee === 'yes');
+    if(!this.props.showFee && !this.props.showNoFee) filteredAreas = [];
+
+
     const onInfoWindowOpen = (props, e) => {
-      console.log(this.state.address === 'undefined');
       const infoContent = (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <strong>{this.state.address === 'undefined' ? '' : this.state.address}</strong>
@@ -132,7 +137,7 @@ export class MapContainer extends Component {
           lng: 25.749583
         }}
       >
-        {areas.map(area => {
+        {filteredAreas.map(area => {
           let color = COLOR_FEE;
           if (area.access === 'private') color = COLOR_PRIVATE;
           if (area.duration) color = COLOR_DISK;
