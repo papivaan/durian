@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { Map, GoogleApiWrapper, Polygon, InfoWindow } from 'google-maps-react';
 import geolib from 'geolib';
 import _ from 'lodash';
@@ -6,6 +7,7 @@ import mapStyle from '../mapStyle.json';
 // import data from '../example.json';
 import data from '../backend/durianMapJson.json';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 import '../App.css';
 
@@ -20,7 +22,6 @@ export class MapContainer extends Component {
   onPolygonClick = (props, marker) => {
     const areaCenter = geolib.getCenter(props.paths);
     this.handleGetAddress(props.lat, props.lng);
-    console.log(this.state.address);
     this.setState({
       activePolygon: marker,
       showingInfoWindow: true,
@@ -53,10 +54,36 @@ export class MapContainer extends Component {
       });
   }
 
+  handleParking = () => {
+    console.log('parking');
+  }
+
   render() {
     const LAT = Number(this.state.center.latitude);
     const LNG = Number(this.state.center.longitude);
     const areas = _.compact(data.areas);
+
+    const onInfoWindowOpen = (props, e) => {
+      const infoContent = (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <strong>{this.state.address}</strong>
+          <p>Kiekko: 2h</p>
+          <p>Tilaa: on</p>
+          <a href={`https://www.google.com/maps/dir/?api=1&origin=Alvar+Aallon+katu+9,+40014+Jyväskylä&destination=${LAT},${LNG}&travelmode=driving`}>
+            Reittiohjeet (Google Maps)
+          </a>
+          <Button
+            size="sm"
+            style={{ marginTop: '4px'}}
+            variant="success"
+            onClick={this.handleParking}>
+              Parkissa
+            </Button>
+        </div>
+      );
+      ReactDOM.render(React.Children.only(infoContent), document.getElementById("info"));
+    };
+
     return (
       <Map
         google={this.props.google}
@@ -88,12 +115,18 @@ export class MapContainer extends Component {
         ))}
         <InfoWindow
           position={{ lat: LAT, lng: LNG }}
-          visible={this.state.showingInfoWindow}>
-            <div>
-              <strong>{this.state.address}</strong>
+          visible={this.state.showingInfoWindow}
+          onOpen={e => {
+            onInfoWindowOpen(this.props, e);
+          }}
+        >
+            <div id="info">
+              {/* <strong>{this.state.address}</strong>
               <p>Kiekko: 2h</p>
               <p>Tilaa: on</p>
-              <a href={`https://www.google.com/maps/dir/?api=1&origin=Alvar+Aallon+katu+9,+40014+Jyväskylä&destination=${LAT},${LNG}&travelmode=driving`}>Reittiohjeet (Google Maps)</a>
+              <a href={`https://www.google.com/maps/dir/?api=1&origin=Alvar+Aallon+katu+9,+40014+Jyväskylä&destination=${LAT},${LNG}&travelmode=driving`}>
+                Reittiohjeet (Google Maps)
+              </a> */}
             </div>
         </InfoWindow>
       </Map>
