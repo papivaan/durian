@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { Row, Col, Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import './App.css';
 import MapContainer from './components/MapContainer';
+import './durra.PNG';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Navbar bg="dark" expand="lg" variant="dark">
-          <Navbar.Brand href="#home">Durian maps</Navbar.Brand>
+          <Navbar.Brand href="#home">
+            <img src="durra.PNG" alt="durian" height="40" width="40" />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -30,8 +33,8 @@ class App extends Component {
                 <NavDropdown.Item href="#about/3.4">About</NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Form inline>
-              <FormControl type="text" placeholder="Search parking area" className="mr-sm-2" />
+            <Form inline className="d-none d-md-block">
+              <FormControl type="text" placeholder="Enter destination" className="mr-sm-2" />
               <Button variant="outline-success">Search</Button>
             </Form>
           </Navbar.Collapse>
