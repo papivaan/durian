@@ -76,6 +76,11 @@ export class MapContainer extends Component {
 
   handleParking = () => {
     console.log('parking');
+    axios.post('/sendConfirmationSms', { address: this.state.address })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => { console.log(error); });
   }
 
   render() {
