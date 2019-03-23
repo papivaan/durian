@@ -6,15 +6,20 @@ import data from '../example.json';
 
 import '../App.css';
 
+const axios = require('axios');
+
 export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
     activePolygon: {},
-    center: {}
+    center: {},
+    address: ''
   };
 
   onPolygonClick = (props, marker) => {
     const areaCenter = geolib.getCenter(props.paths);
+    this.handleGetAddress(props.lat, props.lng);
+    console.log(this.state.address);
     this.setState({
       activePolygon: marker,
       showingInfoWindow: true,
@@ -30,6 +35,19 @@ export class MapContainer extends Component {
       })
     }
   };
+
+  handleGetAddress = (LAT, LNG) => {
+      axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${LAT}+${LNG}&key=4fdd87a7e369405b8b1ccaececf50520`).then(res => {
+        var components = res.data.results[0].components;
+        var formatted_address = `${components.road} ${components.house_number}`;
+        this.setState({
+          address: formatted_address
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   render() {
     const LAT = Number(this.state.center.latitude);
@@ -54,6 +72,8 @@ export class MapContainer extends Component {
           <Polygon
             key={area.type} // fix this
             paths={area.coords}
+            lat={LAT}
+            lng={LNG}
             strokeColor="#161c00"
             strokeOpacity={0.5}
             strokeWeight={2}
@@ -66,10 +86,10 @@ export class MapContainer extends Component {
           position={{ lat: LAT, lng: LNG }}
           visible={this.state.showingInfoWindow}>
             <div>
-              <strong>Gummeruksenkatu</strong>
+              <strong>{this.state.address}</strong>
               <p>Kiekko: 2h</p>
               <p>Tilaa: on</p>
-              <a href="https://www.google.com/maps/dir/?api=1&origin=Alvar+Aallon+katu+9,+40014+Jyväskylä&destination=Gummeruksenkatu+7,+40100+Jyväskylä&travelmode=driving">Reittiohjeet</a>
+              <a href={`https://www.google.com/maps/dir/?api=1&origin=Alvar+Aallon+katu+9,+40014+Jyväskylä&destination=${LAT},${LNG}&travelmode=driving`}>Reittiohjeet (Google Maps)</a>
             </div>
         </InfoWindow>
       </Map>
