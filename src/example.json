@@ -1,0 +1,78 @@
+{
+  "areas": [
+    {
+      "type": "disc",
+      "duration": 2,
+      "fee": null,
+      "openingHours": {
+        "weekDays": {
+          "start": "8:00",
+          "end": "20:00"
+        },
+        "sat": {
+          "start": "8:00",
+          "end": "16:00"
+        },
+        "sun": {
+          "start": null,
+          "end": null
+        }
+      },
+      "coord": [
+        {
+          "lat": 62.238805,
+          "lng": 25.741274
+        },
+        {
+          "lat": 62.238852,
+          "lng": 25.741349
+        },
+        {
+          "lat": 62.238452,
+          "lng": 25.742290
+        },
+        {
+          "lat": 62.238415,
+          "lng": 25.742207
+        }
+      ]
+    },
+    {
+      "type": "meter",
+      "duration": null,
+      "fee": 2,
+      "openingHours": {
+        "weekDays": {
+          "start": "8:00",
+          "end": "20:00"
+        },
+        "sat": {
+          "start": "8:00",
+          "end": "16:00"
+        },
+        "sun": {
+          "start": null,
+          "end": null
+        }
+      },
+      "coord": [
+        {
+          "lat": 62.238805,
+          "lng": 25.741274
+        },
+        {
+          "lat": 62.238852,
+          "lng": 25.741349
+        },
+        {
+          "lat": 62.238452,
+          "lng": 25.742290
+        },
+        {
+          "lat": 62.238415,
+          "lng": 25.742207
+        }
+      ]
+    }
+  ]
+}
