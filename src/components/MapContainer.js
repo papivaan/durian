@@ -60,7 +60,7 @@ export class MapContainer extends Component {
   };
 
   handleGetAddress = (LAT, LNG) => {
-      axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${LAT}+${LNG}&key=4fdd87a7e369405b8b1ccaececf50520`)
+      axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${LAT}+${LNG}&key=3be17afb99ce42f1940d91c02f5fdeac`)
       .then(res => {
         var components = res.data.results[0].components;
         var formatted_address = `${components.road} ${components.house_number ? components.house_number : ''}`;
@@ -91,7 +91,6 @@ export class MapContainer extends Component {
     const LAT = Number(this.state.center.latitude);
     const LNG = Number(this.state.center.longitude);
     const areas = _.compact(this.state.data.areas);
-
     let filteredAreas = areas;
     if(!this.props.showFee) filteredAreas = areas.filter(area => !area.fee);
     if(!this.props.showNoFee) filteredAreas = areas.filter(area => area.fee === 'yes');
