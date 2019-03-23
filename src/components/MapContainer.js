@@ -35,6 +35,7 @@ export class MapContainer extends Component {
         style={{width: '100vw', height: '95vh', position: 'absolute'}}
         styles={mapStyle}
         visible
+        mapTypeControl={false}
         initialCenter={{
           lat: 62.238211,
           lng: 25.741593
