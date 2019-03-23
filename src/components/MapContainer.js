@@ -16,8 +16,9 @@ export class MapContainer extends Component {
     data: {},
     showingInfoWindow: false,
     center: {},
+    area: {},
     address: '',
-    isLoading: false,
+    isLoading: false
   };
 
   componentDidMount() {
@@ -29,7 +30,6 @@ export class MapContainer extends Component {
   }
 
   onPolygonClick = area => {
-    console.log(area);
     const areaCenter = geolib.getCenter(area.coords);
     this.handleGetAddress(
       Number(areaCenter.latitude),
@@ -39,7 +39,10 @@ export class MapContainer extends Component {
       showingInfoWindow: true,
       center: areaCenter,
       isLoading: true,
+      area: area
     });
+    console.log(this.state.area.parkingType);
+    console.log(this.state.area);
   };
 
   onMapClicked = (props) => {
@@ -84,8 +87,10 @@ export class MapContainer extends Component {
       const infoContent = (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <strong>{this.state.address}</strong>
-          <p>Kiekko: 2h</p>
-          <p>Tilaa: on</p>
+          <p>
+            {this.state.area.access === 'private' ? 'Yksityisalue' : this.state.area.fee ? 'Pysäköintimaksu' : 'Kiekko'}
+          </p>
+          <p>{this.state.area.duration ? this.state.area.duration : this.state.area.fee === 'yes' ? '' : this.state.area.fee}</p>
           <a href={`https://www.google.com/maps/dir/?api=1&origin=Alvar+Aallon+katu+9,+40014+Jyväskylä&destination=${LAT},${LNG}&travelmode=driving`}>
             Reittiohjeet (Google Maps)
           </a>
