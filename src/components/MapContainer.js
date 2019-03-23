@@ -5,7 +5,7 @@ import geolib from 'geolib';
 import _ from 'lodash';
 import mapStyle from '../mapStyle.json';
 // import data from '../example.json';
-import data from '../backend/durianMapJson.json';
+// import data from '../backend/durianMapJson.json';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 
@@ -13,11 +13,20 @@ import '../App.css';
 
 export class MapContainer extends Component {
   state = {
+    data: {},
     showingInfoWindow: false,
     center: {},
     address: '',
     isLoading: false,
   };
+
+  componentDidMount() {
+    axios.get('/parkingAreas')
+      .then(res => {
+        this.setState({ data: res.data });
+      })
+      .catch(error => { console.log(error); });
+  }
 
   onPolygonClick = area => {
     console.log(area);
@@ -69,7 +78,7 @@ export class MapContainer extends Component {
   render() {
     const LAT = Number(this.state.center.latitude);
     const LNG = Number(this.state.center.longitude);
-    const areas = _.compact(data.areas);
+    const areas = _.compact(this.state.data.areas);
 
     const onInfoWindowOpen = (props, e) => {
       const infoContent = (
