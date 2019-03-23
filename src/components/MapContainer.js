@@ -11,6 +11,10 @@ import { Button } from 'react-bootstrap';
 
 import '../App.css';
 
+const COLOR_FEE = { stroke: "#161c00", fill: "#fff500" };
+const COLOR_PRIVATE = { stroke: "#708090", fill: "#B0C4DE" };
+const COLOR_DISK = { stroke: "#00008B", fill: "#1E90FF" };
+const COLOR_PARKING_HALL = { stroke: "#7CFC00", fill: "#ADFF2F" };
 export class MapContainer extends Component {
   state = {
     data: {},
@@ -89,9 +93,11 @@ export class MapContainer extends Component {
     const areas = _.compact(this.state.data.areas);
 
     const onInfoWindowOpen = (props, e) => {
+      console.log(this.state.address === 'undefined');
       const infoContent = (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <strong>{this.state.address}</strong>
+          <strong>{this.state.address === 'undefined' ? '' : this.state.address}</strong>
+          <strong>{this.state.area.name ? this.state.area.name : ''}</strong>
           <p>
             {this.state.area.access === 'private' ? 'Yksityisalue' : this.state.area.fee ? 'Pysäköintimaksu' : 'Kiekko'}
           </p>
@@ -122,22 +128,28 @@ export class MapContainer extends Component {
         mapTypeControl={false}
         fullscreenControl={false}
         initialCenter={{
-          lat: 62.238211,
-          lng: 25.741593
+          lat: 62.241680,
+          lng: 25.749583
         }}
       >
-        {areas.map(area => (
-          <Polygon
+        {areas.map(area => {
+          let color = COLOR_FEE;
+          if (area.access === 'private') color = COLOR_PRIVATE;
+          if (area.duration) color = COLOR_DISK;
+          if (area.parkingType === 'multi-storey' || area.parkingType === 'underground') color = COLOR_PARKING_HALL;
+          return (
+            <Polygon
             key={area.id}
             paths={area.coords}
-            strokeColor="#161c00"
+            strokeColor={color.stroke}
             strokeOpacity={0.5}
             strokeWeight={2}
-            fillColor="#fff500"
+            fillColor={color.fill}
             fillOpacity={0.2}
             onClick={() => this.onPolygonClick(area)}
           />
-        ))}
+          )
+        })}
         <InfoWindow
           position={{ lat: LAT, lng: LNG }}
           visible={this.state.showingInfoWindow && !this.state.isLoading}
