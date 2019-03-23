@@ -14,7 +14,7 @@ import '../App.css';
 const COLOR_FEE = { stroke: "#161c00", fill: "#fff500" };
 const COLOR_PRIVATE = { stroke: "#708090", fill: "#B0C4DE" };
 const COLOR_DISK = { stroke: "#00008B", fill: "#1E90FF" };
-const COLOR_PARKING_HALL = { stroke: "#7CFC00", fill: "#ADFF2F" };
+const COLOR_PARKING_HALL = { stroke: "#228B22", fill: "#ADFF2F" };
 export class MapContainer extends Component {
   state = {
     data: {},
