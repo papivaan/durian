@@ -18,7 +18,7 @@ function sendSmsToElksApi (address) {
 //     const username = 'u967f2fe772a5315d1dfd82b16e9a36db'
 //     const password = '62DA6923CC09FF428404D084ACEF638B'
 //     const postFields = {
-//     from:    "ParkJKL",
+//     from:    "park.jkl",
 //     to:      "+358442536783", 
 //     message: "Autosi on parkissa kohteessa: " + address,
 //     }
