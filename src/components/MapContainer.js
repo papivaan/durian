@@ -69,6 +69,7 @@ export class MapContainer extends Component {
               <strong>Gummeruksenkatu</strong>
               <p>Kiekko: 2h</p>
               <p>Tilaa: on</p>
+              <a href="https://www.google.com/maps/dir/?api=1&origin=Alvar+Aallon+katu+9,+40014+Jyväskylä&destination=Gummeruksenkatu+7,+40100+Jyväskylä&travelmode=driving">Reittiohjeet</a>
             </div>
         </InfoWindow>
       </Map>
