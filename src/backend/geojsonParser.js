@@ -20,8 +20,11 @@ durianJSON.areas = areas;
 durianJSON.entrances = entrances;
 
 let durianStr = JSON.stringify(durianJSON);
-fs.writeFile('durianMapJson.json', durianStr, 'utf8', 
-() => {console.log("Geojson parsed!")});
+fs.writeFile('json/durianMapJson.json', durianStr, 'utf8',
+() => {
+  console.log("geojson parsed!")
+  }
+);
 
 function createParkingArea(feature){
   let parkingArea = {};
