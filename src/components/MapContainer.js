@@ -44,6 +44,7 @@ export class MapContainer extends Component {
         styles={mapStyle}
         visible
         mapTypeControl={false}
+        fullscreenControl={false}
         initialCenter={{
           lat: 62.238211,
           lng: 25.741593
