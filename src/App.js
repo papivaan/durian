@@ -11,6 +11,7 @@ class App extends Component {
         <Navbar bg="dark" expand="lg" variant="dark">
           <Navbar.Brand href="#home">
             <img src="durra.PNG" alt="durian" height="40" width="40" />
+            park<span>.</span>jkl
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

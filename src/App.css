@@ -18,3 +18,9 @@ html, body {
 .gm-svpc {
   display: none;
 }
+
+span {
+  color: #fff000;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #fff555;
+}
