@@ -1,8 +1,8 @@
 var fs = require('fs');
 
-const geoJSON = require('./json/export.geojson.json');
+const geoJSON = require('./json/vesa.geojson.json');
 let areas = [];
-let entrances = [];
+let points = [];
 let durianJSON  = {};
 
 
@@ -12,15 +12,15 @@ geoJSON.features.forEach(feature => {
   }
 
   if(feature.geometry.type === "Point"){
-    areas.push(createParkingPoint(feature));
+    points.push(createParkingPoint(feature));
   }
 });
 
 durianJSON.areas = areas;
-durianJSON.entrances = entrances;
+durianJSON.points = points;
 
 let durianStr = JSON.stringify(durianJSON);
-fs.writeFile('json/durianMapJson.json', durianStr, 'utf8',
+fs.writeFile('json/durianMapJson2.json', durianStr, 'utf8',
 () => {
   console.log("geojson parsed!")
   }
@@ -40,12 +40,15 @@ function createParkingPoint(feature){
 
   parkingPoint.coords = [];
   parkingPoint.coords.push(createCoordinate(point[0], point[1]));
+  return parkingPoint;
 }
 
 function initProperties(target, properties){
   target.id = properties["@id"];
   target.fee = properties.fee;
   target.parkingType = properties.parking;
+  if(properties.amenity === "bicycle_parking")
+    target.parkingType = properties.amenity
   target.access = properties.access;
   target.name = properties.name;
   target.capacity = properties.capacity;
