@@ -95,7 +95,6 @@ export class MapContainer extends Component {
     if(!this.props.showNoFee) filteredAreas = areas.filter(area => area.fee === 'yes');
     if(!this.props.showFee && !this.props.showNoFee) filteredAreas = [];
 
-
     const onInfoWindowOpen = (props, e) => {
       const infoContent = (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -160,6 +159,7 @@ export class MapContainer extends Component {
           onOpen={e => {
             onInfoWindowOpen(this.props, e);
           }}
+          onClose={this.onMapClicked}
         >
             <div id="info">
               {/* <strong>{this.state.address}</strong>
