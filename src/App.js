@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Navbar, Nav, NavDropdown, Form, } from 'react-bootstrap';
+import { Row, Col, Navbar, Nav, NavDropdown, Form } from 'react-bootstrap';
 import './App.css';
 import MapContainer from './components/MapContainer';
 import './durra.PNG';
@@ -54,6 +54,33 @@ class App extends Component {
               </NavDropdown>
             </Nav>
             <Form inline>
+              <Row>
+                <Form.Label style={{ color: '#fff' }}>
+                  <strong>Värikoodit:</strong>
+                </Form.Label>
+                <Col>
+                  <Form.Label style={{ color: '#fff500', opacity: '0.5' }}>
+                    <strong>Maksulliset</strong>
+                  </Form.Label>
+                </Col>
+                <Col>
+                  <Form.Label style={{ color: '#1E90FF', opacity: '0.5' }}>
+                    <strong>Kiekolliset</strong>
+                  </Form.Label>
+                </Col>
+                <Col>
+                  <Form.Label style={{ color: '#ADFF2F', opacity: '0.5' }}>
+                    <strong>Parkkitalot</strong>
+                  </Form.Label>
+                </Col>
+                <Col>
+                  <Form.Label style={{ color: '#B0C4DE', opacity: '0.5', marginRight: '20px' }}>
+                    <strong>Yksityiset</strong>
+                  </Form.Label>
+                </Col>
+              </Row>
+            </Form>
+            <Form inline style={{ border: '1px solid #fff', borderRadius: '6px', padding: '5px'}}>
               <Row>
                 <Col>
                   <Form.Check
