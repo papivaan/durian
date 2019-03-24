@@ -3,11 +3,13 @@ import { Row, Col, Navbar, Nav, NavDropdown, Form, } from 'react-bootstrap';
 import './App.css';
 import MapContainer from './components/MapContainer';
 import './durra.PNG';
+import json from './backend/json/durianMapJson.json';
 
 class App extends Component {
   state = {
     showWithFee: true,
     showNoFee: true,
+    showData: false,
   };
 
   handleChangeWithFee = () => {
@@ -18,11 +20,15 @@ class App extends Component {
     this.setState({ showNoFee: !this.state.showNoFee });
   }
 
+  handleChangeVisibility = value => {
+    this.setState({ showData: value });
+  }
+
   render() {
     return (
       <div className="App">
         <Navbar bg="dark" expand="lg" variant="dark">
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="#home" onClick={() => this.handleChangeVisibility(false)}>
             <img src="durra.PNG" alt="durian" height="40" width="40" />
             park<span>.</span>jkl
           </Navbar.Brand>
@@ -31,12 +37,12 @@ class App extends Component {
             <Nav className="mr-auto">
               <Nav.Link
                 href="#home"
-                onClick={() => alert('pöö')}>
+                onClick={() => this.handleChangeVisibility(false)}>
                   Home
                 </Nav.Link>
               <Nav.Link
                 href="#data"
-                onClick={() => alert('pöö')}>
+                onClick={() => this.handleChangeVisibility(true)}>
                 Data
               </Nav.Link>
               <NavDropdown title="Options" id="basic-nav-dropdown">
@@ -48,8 +54,6 @@ class App extends Component {
               </NavDropdown>
             </Nav>
             <Form inline>
-              {/* <FormControl type="text" placeholder="Enter destination" className="mr-sm-2" />
-              <Button variant="outline-success">Search</Button> */}
               <Row>
                 <Col>
                   <Form.Check
@@ -79,10 +83,15 @@ class App extends Component {
             <Col>
               <Row>
               <Col md={12} style={{ height: '100vh', width: '100%'}}>
-                <MapContainer
-                  showFee={this.state.showWithFee}
-                  showNoFee={this.state.showNoFee}
-                />
+              {!this.state.showData && (
+              <MapContainer
+                showFee={this.state.showWithFee}
+                showNoFee={this.state.showNoFee}
+              />
+              )}
+              {this.state.showData && (
+                <p style={{ color: 'white', overflow: 'auto' }}>{JSON.stringify(json)}</p>
+              )}
               </Col>
               </Row>
             </Col>
